@@ -90,6 +90,10 @@ public  class GuiForm extends JFrame {
                     }
 
                 }
+                invoiceDetailsTable.setModel(new DefaultTableModel(InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
+                updateItemsNumbers();
+
+
 
 
             }
@@ -109,6 +113,7 @@ public  class GuiForm extends JFrame {
 
 
                 InvoiceHeader.invoiceHeader.remove(selectedIndex);
+                addinvoiceHeader();
 
 
             }
@@ -156,7 +161,7 @@ public  class GuiForm extends JFrame {
                     fileOperation.convertStingLineToList();
                     addinvoiceHeader();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    System.out.println("File not found");
                 }
             }
         });
