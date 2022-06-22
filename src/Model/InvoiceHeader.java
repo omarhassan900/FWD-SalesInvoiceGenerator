@@ -16,7 +16,7 @@ public class InvoiceHeader {
 
     public InvoiceHeader(String date, String name){
 
-        
+
         invoiceNumber=invoiceHeader.size()+1;
         this.invoiceDate=date;
         this.customerName=name;

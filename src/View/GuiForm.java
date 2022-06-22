@@ -43,9 +43,7 @@ public  class GuiForm extends JFrame {
     private TableColumnModel invoiceDetailsTableColumns;
     private TableColumnModel allInvoiceTableColumn;
 
-    public GuiForm(){
-
-    }
+    public GuiForm(){}
 
     public GuiForm(String title) {
 
