@@ -77,8 +77,6 @@ public class InvoiceLine {
 
         }
 
-
-        System.out.println(numberOfItemsOfInvoice);
         //ToDO add invoce line details to the new object
         int row = 0;
 
@@ -114,16 +112,16 @@ public class InvoiceLine {
 
 
         //Print to validate
-        for(int i=0;i<invoiceLineTableBody.length;i++){
-            for (int j=0;j<5;j++){
-
-                System.out.print(invoiceLineTableBody[i][j]);
-                System.out.print("  ");
-
-            }
-            System.out.println();
-
-        }
+//        for(int i=0;i<invoiceLineTableBody.length;i++){
+//            for (int j=0;j<5;j++){
+//
+//                System.out.print(invoiceLineTableBody[i][j]);
+//                System.out.print("  ");
+//
+//            }
+//            System.out.println();
+//
+//        }
 
 
 

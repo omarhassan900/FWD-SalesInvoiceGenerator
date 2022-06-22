@@ -34,8 +34,6 @@ public class CreateNewInvoice extends GuiForm {
             public void actionPerformed(ActionEvent e) {
                 InvoiceHeader newInvoiceHeader=new InvoiceHeader(dateTextField.getText(),customerNameTextField.getText());
                 dispose();
-//                CreateNewInvoice.super.addinvoiceHeader();
-
             }
         });
 

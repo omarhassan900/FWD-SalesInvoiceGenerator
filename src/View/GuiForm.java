@@ -154,6 +154,7 @@ public  class GuiForm extends JFrame {
                 try {
                     fileOperation.convertStingHeaderToList();
                     fileOperation.convertStingLineToList();
+                    addinvoiceHeader();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -205,9 +206,9 @@ public  class GuiForm extends JFrame {
 
                 updateItemsNumbers();
 
+
+
                 updateInvoiceTotalAmount(selectedIndex);
-
-
 
 
             }
@@ -225,11 +226,12 @@ public  class GuiForm extends JFrame {
 
     //Todo  Add invoice total amount to the total amount Label and in invoice header table
     public void updateInvoiceTotalAmount(int selectedIndex){
+
+
         try {
 
             double totalPrice=0;
             for(int i=0;i<InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()).length;i++){
-
                 totalPrice=totalPrice+ (double)InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText())[i][4];
             }
 
@@ -251,6 +253,46 @@ public  class GuiForm extends JFrame {
 
                 AddLine addLine = new AddLine();
                 addLine.setVisible(true);
+                addLine.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+
+                        invoiceDetailsTable.setModel(new DefaultTableModel(InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
+                        updateInvoiceTotalAmount(Integer.parseInt(invoiceNumberLabel.getText())-1);
+                        updateItemsNumbers();
+
+                    }
+
+                    @Override
+                    public void windowIconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowActivated(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {
+
+                    }
+                });
             }
 
         });
@@ -270,13 +312,61 @@ public  class GuiForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
+//                GuiForm addInvoiceWindow=new GuiForm();
+//                addInvoiceWindow.setTitle("Create invoice");
+//                addInvoiceWindow.setSize(350,130);
+//                addInvoiceWindow.setLocation(700,400);
+//                addInvoiceWindow.setContentPane(panel1);
+
                 CreateNewInvoice createFrame=new CreateNewInvoice();
                 createFrame.setVisible(true);
-                addinvoiceHeader();
+                createFrame.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {
 
+                    }
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+
+                        addinvoiceHeader();
+
+                    }
+
+                    @Override
+                    public void windowIconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowActivated(WindowEvent e) {
+
+                    }
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {
+
+                    }
+                });
             }
+
+
         });
 
     }
+
+
+
 
 }
