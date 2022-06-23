@@ -93,6 +93,8 @@ public  class GuiForm extends JFrame {
                 }
                 invoiceDetailsTable.setModel(new DefaultTableModel(Controller.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
                 updateItemsNumbers();
+                updateInvoiceTotalAmount(Integer.parseInt(invoiceNumberLabel.getText())-1);
+
 
 
 
