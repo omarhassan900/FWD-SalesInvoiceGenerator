@@ -30,20 +30,7 @@ public class InvoiceHeader {
 
     }
 
-    public static   Object[][]  updateTable(){
-        Object[][] invoiceHeaderTableBody = new Object[invoiceHeader.size()][4];
 
-
-        for(int i=0 ;i<invoiceHeader.size();i++){
-            for(int j=0;j<3;j++){
-
-                invoiceHeaderTableBody[i][j]=invoiceHeader.get(i)[j];
-
-            }
-        }
-        return invoiceHeaderTableBody;
-
-    }
 
     public static String getInvoiceNumber() {
         return String.valueOf(invoiceNumber);

@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import Model.FileOperation;
 import Model.InvoiceHeader;
 import Model.InvoiceLine;
@@ -90,7 +91,7 @@ public  class GuiForm extends JFrame {
                     }
 
                 }
-                invoiceDetailsTable.setModel(new DefaultTableModel(InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
+                invoiceDetailsTable.setModel(new DefaultTableModel(Controller.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
                 updateItemsNumbers();
 
 
@@ -176,7 +177,7 @@ public  class GuiForm extends JFrame {
 
     public void addinvoiceHeader() {
 
-        allInvoiceTable.setModel(new DefaultTableModel(InvoiceHeader.updateTable(), new String[]{"No.","Date","Customer","Total"}));
+        allInvoiceTable.setModel(new DefaultTableModel(Controller.updateTable(), new String[]{"No.","Date","Customer","Total"}));
 
 
     }
@@ -198,7 +199,7 @@ public  class GuiForm extends JFrame {
                     invoiceNumberLabel.setText((String) allInvoiceTable.getModel().getValueAt(selectedIndex, 0));
                     invoiceDateField.setText((String) allInvoiceTable.getModel().getValueAt(selectedIndex, 1));
                     customerNameField.setText((String) allInvoiceTable.getModel().getValueAt(selectedIndex, 2));
-                    invoiceDetailsTable.setModel(new DefaultTableModel(InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
+                    invoiceDetailsTable.setModel(new DefaultTableModel(Controller.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
 
 
 
@@ -206,7 +207,7 @@ public  class GuiForm extends JFrame {
 
                 InvoiceLine.setInvoiceNumber(String.valueOf(invoiceNumberLabel.getText()));
 
-                invoiceDetailsTable.setModel(new DefaultTableModel(InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
+                invoiceDetailsTable.setModel(new DefaultTableModel(Controller.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
 
 
                 updateItemsNumbers();
@@ -222,7 +223,7 @@ public  class GuiForm extends JFrame {
     }
     //TODO update column "No." on the invoice_Line table
     public void  updateItemsNumbers(){
-        for(int i=0;i<InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()).length;i++){
+        for(int i=0;i<Controller.getInvoiceLine(invoiceNumberLabel.getText()).length;i++){
 
             invoiceDetailsTable.getModel().setValueAt(i+1,i,0);
         }
@@ -236,8 +237,8 @@ public  class GuiForm extends JFrame {
         try {
 
             double totalPrice=0;
-            for(int i=0;i<InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()).length;i++){
-                totalPrice=totalPrice+ (double)InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText())[i][4];
+            for(int i=0;i<Controller.getInvoiceLine(invoiceNumberLabel.getText()).length;i++){
+                totalPrice=totalPrice+ (double)Controller.getInvoiceLine(invoiceNumberLabel.getText())[i][4];
             }
 
             allInvoiceTable.getModel().setValueAt(totalPrice,selectedIndex,3);
@@ -272,7 +273,7 @@ public  class GuiForm extends JFrame {
                     @Override
                     public void windowClosed(WindowEvent e) {
 
-                        invoiceDetailsTable.setModel(new DefaultTableModel(InvoiceLine.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
+                        invoiceDetailsTable.setModel(new DefaultTableModel(Controller.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
                         updateInvoiceTotalAmount(Integer.parseInt(invoiceNumberLabel.getText())-1);
                         updateItemsNumbers();
 
