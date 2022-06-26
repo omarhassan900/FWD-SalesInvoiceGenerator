@@ -171,6 +171,8 @@ public  class GuiForm extends JFrame {
                     fileOperation.printLoadedData();
                 } catch (IOException ex) {
                     System.out.println("File not found");
+                } catch (Exception ex) {
+                    System.out.println("Wrong file format -- should be (.csv)");
                 }
             }
         });

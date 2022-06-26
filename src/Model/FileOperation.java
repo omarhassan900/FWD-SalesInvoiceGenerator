@@ -69,7 +69,7 @@ public class FileOperation extends Component {
     }
 
 
-    public void convertStingHeaderToList() throws IOException {
+    public void convertStingHeaderToList() throws Exception {
 
         String path =getPath();
         String[] p=path.split(".");
@@ -100,7 +100,7 @@ public class FileOperation extends Component {
 
             }
         }else{
-            System.out.println("Wrong file format 'Should be csv'");
+            throw new  Exception("Wrong file format");
         }
 
     }
