@@ -15,9 +15,15 @@ public class InvoiceHeader {
     public static ArrayList<String[]> invoiceHeader=new ArrayList<String[]>();
 
     public InvoiceHeader(String date, String name){
-
-
         invoiceNumber=invoiceHeader.size()+1;
+        for(int i=0;i<invoiceHeader.size();i++){
+
+
+            if(invoiceNumber==Integer.parseInt(invoiceHeader.get(i)[0])){
+                invoiceNumber++;
+            }
+
+        }
         this.invoiceDate=date;
         this.customerName=name;
 

@@ -12,9 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.event.*;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Vector;
 
 import static Model.InvoiceLine.invoiceLine;
 
@@ -116,6 +113,14 @@ public  class GuiForm extends JFrame {
 
 
                 InvoiceHeader.invoiceHeader.remove(selectedIndex);
+
+                String invoiceNumber= (String) allInvoiceTable.getModel().getValueAt(selectedIndex,0);
+                for(int i=invoiceLine.size();i>0;i--){
+                    if( invoiceLine.get(i-1)[0].equals(invoiceNumber)){
+                        invoiceLine.remove(i-1);
+                    }
+
+                }
                 addinvoiceHeader();
 
 
