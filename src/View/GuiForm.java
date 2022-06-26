@@ -156,13 +156,14 @@ public  class GuiForm extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(InvoiceHeader.invoiceHeader.size());
+
 
                 FileOperation fileOperation=new FileOperation();
                 try {
                     fileOperation.convertStingHeaderToList();
                     fileOperation.convertStingLineToList();
                     addinvoiceHeader();
+                    fileOperation.printLoadedData();
                 } catch (IOException ex) {
                     System.out.println("File not found");
                 }
@@ -274,10 +275,13 @@ public  class GuiForm extends JFrame {
 
                     @Override
                     public void windowClosed(WindowEvent e) {
-
-                        invoiceDetailsTable.setModel(new DefaultTableModel(Controller.getInvoiceLine(invoiceNumberLabel.getText()),new String[]{"No,","Item Name","Item Price","Item Count","Total"}));
-                        updateInvoiceTotalAmount(Integer.parseInt(invoiceNumberLabel.getText())-1);
-                        updateItemsNumbers();
+                        try {
+                            invoiceDetailsTable.setModel(new DefaultTableModel(Controller.getInvoiceLine(invoiceNumberLabel.getText()), new String[]{"No,", "Item Name", "Item Price", "Item Count", "Total"}));
+                            updateInvoiceTotalAmount(Integer.parseInt(invoiceNumberLabel.getText()) - 1);
+                            updateItemsNumbers();
+                        }catch (NumberFormatException t){
+                            System.out.println("No invoice has been selected");
+                        }
 
                     }
 

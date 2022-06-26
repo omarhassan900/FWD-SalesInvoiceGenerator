@@ -32,8 +32,19 @@ public class CreateNewInvoice extends GuiForm {
         createInvoiceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                InvoiceHeader newInvoiceHeader=new InvoiceHeader(dateTextField.getText(),customerNameTextField.getText());
-                dispose();
+
+                try {
+
+
+                    String date = dateTextField.getText();
+                    String[] d = date.split("-");
+                    String x=d[2];
+                    InvoiceHeader newInvoiceHeader=new InvoiceHeader(dateTextField.getText(),customerNameTextField.getText());
+                    dispose();
+                }catch (ArrayIndexOutOfBoundsException q){
+                    System.out.println("Wrong date format dd-mm-yyyy");
+                }
+
             }
         });
 

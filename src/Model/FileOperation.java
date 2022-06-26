@@ -1,11 +1,13 @@
 package Model;
 
+import Controller.Controller;
 import View.GuiForm;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class FileOperation extends Component {
     public void saveStringOf(String[] invoiceHeaderString) throws IOException {
 
         String path=getPath();
+        path=path+".csv";
         File fileWriter=new File(path);
         PrintWriter printWriter=new PrintWriter(fileWriter);
 
@@ -69,28 +72,35 @@ public class FileOperation extends Component {
     public void convertStingHeaderToList() throws IOException {
 
         String path =getPath();
-        BufferedReader bufferedReader=new BufferedReader(new FileReader(path));
-        List lines=new ArrayList<>();
-        String data;
+        String[] p=path.split(".");
+        System.out.println(getFileExtension(path));
 
-        while((data=bufferedReader.readLine())!=null){
-            lines.add(data);
-        }
+        if(getFileExtension(path).equals("csv")) {
 
-        //TODO : Delete All data on the old Invoice
-        for(int i=InvoiceHeader.invoiceHeader.size()-1;i>=0;i--){
-            InvoiceHeader.invoiceHeader.remove(i);
-        }
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            List lines = new ArrayList<>();
+            String data;
+
+            while ((data = bufferedReader.readLine()) != null) {
+                lines.add(data);
+            }
+
+            //TODO : Delete All data on the old Invoice
+            for (int i = InvoiceHeader.invoiceHeader.size() - 1; i >= 0; i--) {
+                InvoiceHeader.invoiceHeader.remove(i);
+            }
 
 
+            for (int i = 0; i < lines.size(); i++) {
+                String x;
+                x = (String) lines.get(i);
+                var words = x.split(",");
 
-        for(int i=0;i<lines.size();i++){
-            String x;
-            x= (String) lines.get(i);
-            var words= x.split(",");
+                InvoiceHeader.invoiceHeader.add(words);
 
-            InvoiceHeader.invoiceHeader.add(words);
-
+            }
+        }else{
+            System.out.println("Wrong file format 'Should be csv'");
         }
 
     }
@@ -112,7 +122,6 @@ public class FileOperation extends Component {
 
         //TODO : Delete All items on the old Invoice
         for(int i=InvoiceLine.invoiceLine.size()-1;i>=0;i--){
-            System.out.println(i);
             InvoiceLine.invoiceLine.remove(i);
         }
 
@@ -125,6 +134,50 @@ public class FileOperation extends Component {
 
         }
 
+    }
+
+
+
+    public void printLoadedData(){
+
+
+        for(int i=0;i<InvoiceHeader.invoiceHeader.size();i++){
+            for(int j=0;j<3;j++) {
+                System.out.print(InvoiceHeader.invoiceHeader.get(i)[j]);
+                System.out.print("  ");
+            }
+            System.out.println("{  ");
+
+            Object[][] invoiceDetails=  Controller.getInvoiceLine(String.valueOf(InvoiceHeader.invoiceHeader.get(i)[0]));
+
+            for(int k=0;k<invoiceDetails.length;k++){
+
+                for (int l=0;l<4;l++){
+                    System.out.print(invoiceDetails[k][l+1]);
+                    System.out.print("  ");
+
+                }
+                System.out.println();
+
+
+
+            }
+
+            System.out.println("}");
+            System.out.println("\n");
+
+
+
+
+        }
+
+    }
+
+
+    public static String getFileExtension(String fullName) {
+        String fileName = new File(fullName).getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
     }
 
 
